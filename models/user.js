@@ -22,8 +22,8 @@ module.exports = function setupUserModel(config) {
         allowNull: false
     },
     personId: {
-        allowNull: false,
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: 'people',
           key: 'id'
