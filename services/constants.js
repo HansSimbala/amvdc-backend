@@ -1,6 +1,10 @@
 'use strict';
 
 module.exports = {
+  // Categories
+  beerCategory: { id: 1, name: 'Cerveza'},
+  bottledWaterCategory: { id: 3, name: 'Agua'},
+  softDrinkCategory: { id: 2, name: 'Gaseosa'},
   // Status
   activeStatus: { id: 1, name: 'Active' },
   inactiveStatus: { id: 0, name: 'Inactive' },

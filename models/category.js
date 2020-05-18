@@ -12,7 +12,7 @@ module.exports = function setupCategoryModel(config) {
       type: Sequelize.STRING(25)
     },
     description: {
-      allowNull: false,
+      allowNull: true,
       type: Sequelize.STRING(50)
     }
   });

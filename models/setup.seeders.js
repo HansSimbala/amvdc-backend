@@ -2,6 +2,13 @@ const constants = require('./../services/constants');
 const faker = require('faker');
 
 //#region Helpers
+function getCategories() {
+  return [
+    constants.beerCategory,
+    constants.bottledWaterCategory,
+    constants.softDrinkCategory
+  ]
+}
 function getDocumentTypes() {
   return [
     constants.dniDocumentType,
@@ -10,6 +17,10 @@ function getDocumentTypes() {
   ]
 }
 //#endregion
+
+async function seedCategories(model) {
+  await model.bulkCreate(getCategories());
+}
 
 async function seedDocumentTypes(model) {
   await model.bulkCreate(getDocumentTypes());
@@ -39,6 +50,7 @@ async function seedPeople(model) {
 }
 
 module.exports = {
+  seedCategories,
   seedDocumentTypes,
   seedPeople
 };

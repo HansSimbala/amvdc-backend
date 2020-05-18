@@ -3,18 +3,18 @@
 const setupDatabase = require('./database');
 
 const setupCategoryModel = require('./category');
-const setupCustomerModel = require('./customer');
 const setupDocumentTypeModel = require('./documentType');
-const setupInventoryModel = require('./inventory');
-const setupOrderModel = require('./order');
-const setupOrderDetailModel = require('./orderDetail');
 const setupPermissionModel = require('./permission');
+const setupRoleModel = require('./role');
+const setupProductModel = require('./product');
+const setupInventoryModel = require('./inventory');
 const setupPermissionRoleModel = require('./permissionRole');
 const setupPersonModel = require('./person');
-const setupProductModel = require('./product');
-const setupRoleModel = require('./role');
-const setupRoleUserModel = require('./roleUser');
+const setupCustomerModel = require('./customer');
+const setupOrderModel = require('./order');
+const setupOrderDetailModel = require('./orderDetail');
 const setupUserModel = require('./user');
+const setupRoleUserModel = require('./roleUser');
 
 module.exports = async function (setup = false) {
 
@@ -22,18 +22,18 @@ module.exports = async function (setup = false) {
   const dbInstance = setupDatabase(config);
 
   const categoryModel = setupCategoryModel(config);
-  const customerModel = setupCustomerModel(config);
   const documentTypeModel = setupDocumentTypeModel(config);
-  const inventoryModel = setupInventoryModel(config);
-  const orderModel = setupOrderModel(config);
-  const orderDetailModel = setupOrderDetailModel(config);
   const permissionModel = setupPermissionModel(config);
+  const roleModel = setupRoleModel(config);
+  const productModel = setupProductModel(config);
+  const inventoryModel = setupInventoryModel(config);
   const permissionRoleModel = setupPermissionRoleModel(config);
   const personModel = setupPersonModel(config);
-  const productModel = setupProductModel(config);
-  const roleModel = setupRoleModel(config);
-  const roleUserModel = setupRoleUserModel(config);
+  const customerModel = setupCustomerModel(config);
+  const orderModel = setupOrderModel(config);
+  const orderDetailModel = setupOrderDetailModel(config);
   const userModel = setupUserModel(config);
+  const roleUserModel = setupRoleUserModel(config);
 
   await dbInstance.authenticate();
 
@@ -43,17 +43,17 @@ module.exports = async function (setup = false) {
 
   return {
     categoryModel,
-    customerModel,
     documentTypeModel,
-    inventoryModel,
-    orderModel,
-    orderDetailModel,
     permissionModel,
+    roleModel,
+    productModel,
+    inventoryModel,
     permissionRoleModel,
     personModel,
-    productModel,
-    roleModel,
-    roleUserModel,
-    userModel
+    customerModel,
+    orderModel,
+    orderDetailModel,
+    userModel,
+    roleUserModel
   };
 };

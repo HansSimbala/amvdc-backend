@@ -15,11 +15,11 @@ module.exports = function setupOrderDetailModel(config) {
           key: 'id'
         }
     },
-    customerId: {
+    inventoryId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'customers',
+          model: 'inventories',
           key: 'id'
         }
     },
@@ -29,6 +29,6 @@ module.exports = function setupOrderDetailModel(config) {
     }
   });
   orderDetail.belongsTo(sequelize.models.order, { as: 'order' });
-  orderDetail.belongsTo(sequelize.models.customer, { as: 'customer' });
+  orderDetail.belongsTo(sequelize.models.inventory, { as: 'inventory' });
   return orderDetail;
 };
