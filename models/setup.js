@@ -24,6 +24,8 @@ async function setup() {
   await seeders.seedCategories(db.categoryModel);
   await seeders.seedDocumentTypes(db.documentTypeModel);
   await seeders.seedPeople(db.personModel);
+  await seeders.seedPermissions(db.permissionModel);
+  await seeders.seedRoles(db.roleModel);
 
   console.log('Success');
   process.exit(0);

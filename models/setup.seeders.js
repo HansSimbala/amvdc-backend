@@ -4,16 +4,34 @@ const faker = require('faker');
 //#region Helpers
 function getCategories() {
   return [
-    constants.beerCategory,
-    constants.bottledWaterCategory,
-    constants.softDrinkCategory
+    constants.BEER_CATEGORY,
+    constants.BOTTLED_WATER_CATEGORY,
+    constants.SOFT_DRINK_CATEGORY
   ]
 }
+
 function getDocumentTypes() {
   return [
-    constants.dniDocumentType,
-    constants.foreignCardDocumentType,
-    constants.passportDocumentType
+    constants.DNI_DOCUMENT_TYPE,
+    constants.FOREIGN_CARD_DOCUMENT_TYPE,
+    constants.PASSPORT_DOCUMENT_TYPE
+  ]
+}
+
+function getPermissions() {
+  return [
+    constants.ORDERS_PERMISSION,
+    constants.CASH_SALE_PERMISSION,
+    constants.CONSIGNMENT_SALE_PERMISSION,
+    constants.CREDIT_SALE_PERMISSION
+  ]
+}
+
+function getRoles() {
+  return [
+    constants.ADMINISTRATOR,
+    constants.DEBT_COLLECTOR,
+    constants.DELIVERY_DRIVER
   ]
 }
 //#endregion
@@ -31,7 +49,7 @@ async function seedPeople(model) {
   for (let index = 0; index < 50; index++) {
     const documentTypeId = faker.random.arrayElement(getDocumentTypes()).id;
     let document = '';
-    if (documentTypeId === constants.dniDocumentType.id) {
+    if (documentTypeId === constants.DNI_DOCUMENT_TYPE.id) {
       document = faker.random.number({ min: 10000000, max: 99999999 });;
     } else {
       document = faker.random.alphaNumeric(12).toUpperCase();
@@ -49,8 +67,18 @@ async function seedPeople(model) {
   await model.bulkCreate(people);
 }
 
+async function seedPermissions(model) {
+  await model.bulkCreate(getPermissions());
+}
+
+async function seedRoles(model) {
+  await model.bulkCreate(getRoles());
+}
+
 module.exports = {
   seedCategories,
   seedDocumentTypes,
-  seedPeople
+  seedPeople,
+  seedPermissions,
+  seedRoles
 };
