@@ -3,18 +3,10 @@
 const Sequelize = require('sequelize');
 const setupDatabase = require('./database');
 
-module.exports = function setupPermissionRoleModel(config) {
+module.exports = function setupUserRoleModel(config) {
     const sequelize = setupDatabase(config);
 
-    const roleUser = sequelize.define('roleUser', {
-        roleId: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'roles',
-                key: 'id'
-            }
-        },
+    const userRole = sequelize.define('userRole', {
         userId: {
             type: Sequelize.INTEGER,
             allowNull: false,
@@ -22,11 +14,17 @@ module.exports = function setupPermissionRoleModel(config) {
                 model: 'users',
                 key: 'id'
             }
+        },
+        roleId: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'roles',
+                key: 'id'
+            }
         }
-    }, {
-        tableName: 'role_user'
     });
-    roleUser.belongsTo(sequelize.models.role, { as: 'role' });
-    roleUser.belongsTo(sequelize.models.user, { as: 'user' });
-    return roleUser;
+    userRole.belongsTo(sequelize.models.user, { as: 'user' });
+    userRole.belongsTo(sequelize.models.role, { as: 'role' });
+    return userRole;
 };

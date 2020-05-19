@@ -8,13 +8,13 @@ const setupPermissionModel = require('./permission');
 const setupRoleModel = require('./role');
 const setupProductModel = require('./product');
 const setupInventoryModel = require('./inventory');
-const setupPermissionRoleModel = require('./permissionRole');
+const setupRolePermissionModel = require('./rolePermission');
 const setupPersonModel = require('./person');
 const setupCustomerModel = require('./customer');
 const setupOrderModel = require('./order');
 const setupOrderDetailModel = require('./orderDetail');
 const setupUserModel = require('./user');
-const setupRoleUserModel = require('./roleUser');
+const setupUserRoleModel = require('./userRole');
 
 module.exports = async function (setup = false) {
 
@@ -27,13 +27,13 @@ module.exports = async function (setup = false) {
   const roleModel = setupRoleModel(config);
   const productModel = setupProductModel(config);
   const inventoryModel = setupInventoryModel(config);
-  const permissionRoleModel = setupPermissionRoleModel(config);
+  const rolePermissionModel = setupRolePermissionModel(config);
   const personModel = setupPersonModel(config);
   const customerModel = setupCustomerModel(config);
   const orderModel = setupOrderModel(config);
   const orderDetailModel = setupOrderDetailModel(config);
   const userModel = setupUserModel(config);
-  const roleUserModel = setupRoleUserModel(config);
+  const userRoleModel = setupUserRoleModel(config);
 
   await dbInstance.authenticate();
 
@@ -48,12 +48,12 @@ module.exports = async function (setup = false) {
     roleModel,
     productModel,
     inventoryModel,
-    permissionRoleModel,
+    rolePermissionModel,
     personModel,
     customerModel,
     orderModel,
     orderDetailModel,
     userModel,
-    roleUserModel
+    userRoleModel
   };
 };

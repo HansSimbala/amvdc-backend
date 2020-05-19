@@ -15,12 +15,16 @@ module.exports = {
   CONSIGNMENT_SALE_PERMISSION: { id: 3, name: 'Venta a consignación', slug: 'consignment', description: 'Venta sobre consignación.' },
   CREDIT_SALE_PERMISSION: { id: 4, name: 'Venta al credito', slug: 'credit', description: 'Venta al credito.' },
   // Role
-  ADMINISTRATOR: { id: 1, name: 'Aministrador', slug: 'administrator', description: 'Se encarga de que se cumpla las entregas.' },
-  DEBT_COLLECTOR: { id: 2, name: 'Reparto', slug: 'debt-collector', description: 'El que realiza el cobro de los pedidos.' },
-  DELIVERY_DRIVER: { id: 3, name: 'Chofer Repartidor', slug: 'delivery-driver', description: 'El distribuidor del pedido.' },
+  ADMINISTRATE_ROLE: { id: 1, name: 'Aministrar', slug: 'administrate', description: 'Administración del sistema.' },
+  COLLECT_ROLE: { id: 2, name: 'Cobrar', slug: 'collect', description: 'Cobro de pedidos.' },
+  DISTRIBUTE_ROLE: { id: 3, name: 'Distribuir', slug: 'distribute', description: 'Distribución de pedidos.' },
   // Status
   ACTIVE_STATUS: { id: 1, name: 'Active' },
   INACTIVE_STATUS: { id: 0, name: 'Inactive' },
+  // User
+  ADMIN_USER: { id: 1, username: 'admin', email: 'admin@amvdc.com', password: 'admin', personId: 1},
+  // Person
+  ADMIN_PERSON: { name: 'Hans', lastName: 'Simbala', birthdate: '1998-03-31', document: '72721607', createdAt: new Date(), updatedAt: new Date() },
   // BCRYPT
   BCRYPT_WORK_FACTOR: 12
 }

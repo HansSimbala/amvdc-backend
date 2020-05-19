@@ -1,5 +1,7 @@
-const constants = require('./../services/constants');
+const bcrypt = require('bcryptjs');
 const faker = require('faker');
+
+const constants = require('./../services/constants');
 
 //#region Helpers
 function getCategories() {
@@ -29,9 +31,9 @@ function getPermissions() {
 
 function getRoles() {
   return [
-    constants.ADMINISTRATOR,
-    constants.DEBT_COLLECTOR,
-    constants.DELIVERY_DRIVER
+    constants.ADMINISTRATE_ROLE,
+    constants.COLLECT_ROLE,
+    constants.DISTRIBUTE_ROLE
   ]
 }
 //#endregion
@@ -46,7 +48,11 @@ async function seedDocumentTypes(model) {
 
 async function seedPeople(model) {
   const people = [];
-  for (let index = 0; index < 50; index++) {
+
+  // Adding default people
+  people.push({ ...constants.ADMIN_PERSON, documentTypeId: constants.DNI_DOCUMENT_TYPE.id });
+
+  for (let index = 0; index < 20; index++) {
     const documentTypeId = faker.random.arrayElement(getDocumentTypes()).id;
     let document = '';
     if (documentTypeId === constants.DNI_DOCUMENT_TYPE.id) {
@@ -75,10 +81,36 @@ async function seedRoles(model) {
   await model.bulkCreate(getRoles());
 }
 
+async function seedRolePermissions(model) {
+  const rolePermission = [];
+
+  rolePermission.push({ roleId: constants.ADMINISTRATE_ROLE.id, permissionId: constants.ORDERS_PERMISSION.id, createdAt: faker.date.past(), updatedAt: new Date() });
+  rolePermission.push({ roleId: constants.DISTRIBUTE_ROLE.id, permissionId: constants.ORDERS_PERMISSION.id, createdAt: faker.date.past(), updatedAt: new Date() });
+  rolePermission.push({ roleId: constants.COLLECT_ROLE.id, permissionId: constants.CASH_SALE_PERMISSION.id, createdAt: faker.date.past(), updatedAt: new Date() });
+  rolePermission.push({ roleId: constants.COLLECT_ROLE.id, permissionId: constants.CREDIT_SALE_PERMISSION.id, createdAt: faker.date.past(), updatedAt: new Date() });
+  rolePermission.push({ roleId: constants.COLLECT_ROLE.id, permissionId: constants.CONSIGNMENT_SALE_PERMISSION.id, createdAt: faker.date.past(), updatedAt: new Date() });
+
+  await model.bulkCreate(rolePermission);
+}
+
+async function seedUsers(model) {
+  const users = [];
+
+  const generatePassword = async (password) => {
+    return await bcrypt.hash(password, constants.BCRYPT_WORK_FACTOR);
+  }
+
+  users.push({ username: constants.ADMIN_USER.username , email: constants.ADMIN_USER.email, password: await generatePassword(constants.ADMIN_USER.password), personId: constants.ADMIN_USER.personId, status: constants.ACTIVE_STATUS.id, createdAt: faker.date.past(), updatedAt: new Date() });
+  
+  await model.bulkCreate(users);
+}
+
 module.exports = {
   seedCategories,
   seedDocumentTypes,
   seedPeople,
   seedPermissions,
-  seedRoles
+  seedRoles,
+  seedRolePermissions,
+  seedUsers
 };

@@ -10,7 +10,7 @@ module.exports = function setupAuthenticationService(userModel) {
     const emailExists = await userModel.findOne({ where: { email: data.email } });
     const passwordMatch = !emailExists ? false : await bcrypt.compare(data.password, emailExists.password);
     console.log(passwordMatch);
-    if(!emailExists || !passwordMatch){
+    if(!emailExists || !passwordMatch) {
         return baseService.getServiceResponse(404, 'Not found', {});
     }
     return baseService.getServiceResponse(200, 'Success', {});
