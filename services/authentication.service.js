@@ -13,7 +13,13 @@ module.exports = function setupAuthenticationService(userModel) {
     if(!emailExists || !passwordMatch) {
         return baseService.getServiceResponse(404, 'Not found', {});
     }
-    return baseService.getServiceResponse(200, 'Success', {});
+    const userData = await getUserData(data);
+    return baseService.getServiceResponse(200, 'Success', userData);
+  }
+
+  async function getUserData(data) {
+    const userData = [];
+
   }
 
   function checkLogin(email, password) {
