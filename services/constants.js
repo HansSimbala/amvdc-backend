@@ -22,9 +22,11 @@ module.exports = {
   ACTIVE_STATUS: { id: 1, name: 'Active' },
   INACTIVE_STATUS: { id: 0, name: 'Inactive' },
   // User
-  ADMIN_USER: { id: 1, username: 'admin', email: 'admin@amvdc.com', password: 'admin', personId: 1},
+  ADMIN_USER: { id: 1, username: 'admin', email: 'admin@amvdc.com', password: 'admin' },
+  DELIVERY_USER: { id: 2, username: 'delivery', email: 'delivery@amvdc.com', password: 'delivery' },
   // Person
-  ADMIN_PERSON: { name: 'Hans', lastName: 'Simbala', birthdate: '1998-03-31', document: '72721607', createdAt: new Date(), updatedAt: new Date() },
+  ADMIN_PERSON: { id: 1, name: 'Hans', lastName: 'Simbala', birthdate: '1998-03-31', document: '72721607', createdAt: new Date(), updatedAt: new Date() },
+  DELIVERY_PERSON: { id: 2, name: 'Juan', lastName: 'Perez', birthdate: '1985-07-25', document: '78791907', createdAt: new Date(), updatedAt: new Date() },
   // BCRYPT
   BCRYPT_WORK_FACTOR: 12
 }

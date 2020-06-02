@@ -8,8 +8,9 @@ const setupBaseService = require('./base.service');
 module.exports = function setupContributedService(dependencies) {
     let baseService = new setupBaseService();
     const userModel = dependencies.userModel;
-    const personService = dependencies.personService;
     const personModel = dependencies.personModel;
+    
+    const personService = dependencies.personService;
 
     async function createUser(user) {
       const errors = [];

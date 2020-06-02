@@ -51,8 +51,9 @@ async function seedPeople(model) {
 
   // Adding default people
   people.push({ ...constants.ADMIN_PERSON, documentTypeId: constants.DNI_DOCUMENT_TYPE.id });
+  people.push({ ...constants.DELIVERY_PERSON, documentTypeId: constants.DNI_DOCUMENT_TYPE.id });
 
-  for (let index = 0; index < 20; index++) {
+  for (let index = people.length + 1; index < 20; index++) {
     const documentTypeId = faker.random.arrayElement(getDocumentTypes()).id;
     let document = '';
     if (documentTypeId === constants.DNI_DOCUMENT_TYPE.id) {
@@ -61,6 +62,7 @@ async function seedPeople(model) {
       document = faker.random.alphaNumeric(12).toUpperCase();
     }
     people.push({
+      id: index,
       name: faker.name.firstName(),
       lastName: faker.name.lastName(),
       birthdate: faker.date.past(),
@@ -82,15 +84,15 @@ async function seedRoles(model) {
 }
 
 async function seedRolePermissions(model) {
-  const rolePermission = [];
+  const rolePermissions = [];
 
-  rolePermission.push({ roleId: constants.ADMINISTRATE_ROLE.id, permissionId: constants.ORDERS_PERMISSION.id, createdAt: faker.date.past(), updatedAt: new Date() });
-  rolePermission.push({ roleId: constants.DISTRIBUTE_ROLE.id, permissionId: constants.ORDERS_PERMISSION.id, createdAt: faker.date.past(), updatedAt: new Date() });
-  rolePermission.push({ roleId: constants.COLLECT_ROLE.id, permissionId: constants.CASH_SALE_PERMISSION.id, createdAt: faker.date.past(), updatedAt: new Date() });
-  rolePermission.push({ roleId: constants.COLLECT_ROLE.id, permissionId: constants.CREDIT_SALE_PERMISSION.id, createdAt: faker.date.past(), updatedAt: new Date() });
-  rolePermission.push({ roleId: constants.COLLECT_ROLE.id, permissionId: constants.CONSIGNMENT_SALE_PERMISSION.id, createdAt: faker.date.past(), updatedAt: new Date() });
+  rolePermissions.push({ roleId: constants.ADMINISTRATE_ROLE.id, permissionId: constants.ORDERS_PERMISSION.id, createdAt: faker.date.past(), updatedAt: new Date() });
+  rolePermissions.push({ roleId: constants.DISTRIBUTE_ROLE.id, permissionId: constants.ORDERS_PERMISSION.id, createdAt: faker.date.past(), updatedAt: new Date() });
+  rolePermissions.push({ roleId: constants.COLLECT_ROLE.id, permissionId: constants.CASH_SALE_PERMISSION.id, createdAt: faker.date.past(), updatedAt: new Date() });
+  rolePermissions.push({ roleId: constants.COLLECT_ROLE.id, permissionId: constants.CREDIT_SALE_PERMISSION.id, createdAt: faker.date.past(), updatedAt: new Date() });
+  rolePermissions.push({ roleId: constants.COLLECT_ROLE.id, permissionId: constants.CONSIGNMENT_SALE_PERMISSION.id, createdAt: faker.date.past(), updatedAt: new Date() });
 
-  await model.bulkCreate(rolePermission);
+  await model.bulkCreate(rolePermissions);
 }
 
 async function seedUsers(model) {
@@ -100,9 +102,24 @@ async function seedUsers(model) {
     return await bcrypt.hash(password, constants.BCRYPT_WORK_FACTOR);
   }
 
-  users.push({ username: constants.ADMIN_USER.username , email: constants.ADMIN_USER.email, password: await generatePassword(constants.ADMIN_USER.password), personId: constants.ADMIN_USER.personId, status: constants.ACTIVE_STATUS.id, createdAt: faker.date.past(), updatedAt: new Date() });
+  // ADMIN
+  users.push({ username: constants.ADMIN_USER.username , email: constants.ADMIN_USER.email, password: await generatePassword(constants.ADMIN_USER.password), personId: constants.ADMIN_PERSON.id, status: constants.ACTIVE_STATUS.id, createdAt: faker.date.past(), updatedAt: new Date() });
+  // DELIVERY
+  users.push({ username: constants.DELIVERY_USER.username , email: constants.DELIVERY_USER.email, password: await generatePassword(constants.DELIVERY_USER.password), personId: constants.DELIVERY_PERSON.id, status: constants.ACTIVE_STATUS.id, createdAt: faker.date.past(), updatedAt: new Date() });
   
   await model.bulkCreate(users);
+}
+
+async function seedUserRoles(model) {
+  const userRoles = [];
+
+  // ADMIN
+  userRoles.push({ userId: constants.ADMIN_USER.id, roleId: constants.COLLECT_ROLE.id, createdAt: faker.date.past(), updatedAt: new Date() });
+  userRoles.push({ userId: constants.ADMIN_USER.id, roleId: constants.DISTRIBUTE_ROLE.id, createdAt: faker.date.past(), updatedAt: new Date() });
+  // DELIVERY
+  userRoles.push({ userId: constants.DELIVERY_USER.id, roleId: constants.DISTRIBUTE_ROLE.id, createdAt: faker.date.past(), updatedAt: new Date() });
+
+  await model.bulkCreate(userRoles);
 }
 
 module.exports = {
@@ -112,5 +129,6 @@ module.exports = {
   seedPermissions,
   seedRoles,
   seedRolePermissions,
-  seedUsers
+  seedUsers,
+  seedUserRoles
 };
