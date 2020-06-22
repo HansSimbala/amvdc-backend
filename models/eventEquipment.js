@@ -27,6 +27,9 @@ module.exports = function setupEventEquipmentModel(config) {
           key: 'id'
         }
     }
+  }, 
+  {
+    tableName: 'eventEquipment'
   });
   
   eventEquipment.belongsTo(sequelize.models.event, { as: 'event' });

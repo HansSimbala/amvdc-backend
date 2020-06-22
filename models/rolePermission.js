@@ -24,7 +24,9 @@ module.exports = function setupRolePermissionModel(config) {
             }
         }
     });
+    
     rolePermission.belongsTo(sequelize.models.role, { as: 'role' });
     rolePermission.belongsTo(sequelize.models.permission, { as: 'permission' });
+    
     return rolePermission;
 };

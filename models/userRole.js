@@ -24,7 +24,9 @@ module.exports = function setupUserRoleModel(config) {
             }
         }
     });
+    
     userRole.belongsTo(sequelize.models.user, { as: 'user' });
     userRole.belongsTo(sequelize.models.role, { as: 'role' });
+    
     return userRole;
 };

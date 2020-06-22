@@ -34,6 +34,8 @@ module.exports = function setupUserModel(config) {
       allowNull: false
     }
   });
+  
   user.belongsTo(sequelize.models.person, { as: 'person' });
+  
   return user;
 };
