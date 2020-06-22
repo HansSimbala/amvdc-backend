@@ -23,7 +23,7 @@ module.exports = function setupEventEquipmentModel(config) {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'equipments',
+          model: 'equipment',
           key: 'id'
         }
     }

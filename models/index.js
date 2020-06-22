@@ -47,7 +47,6 @@ module.exports = async function (setup = false) {
   const orderModel = setupOrderModel(config);
   const orderDetailModel = setupOrderDetailModel(config);
 
-
   await dbInstance.authenticate();
 
   if (setup) {
