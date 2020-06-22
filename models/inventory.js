@@ -24,6 +24,8 @@ module.exports = function setupInventoryModel(config) {
         allowNull: false
     }
   });
+  
   inventory.belongsTo(sequelize.models.product, { as: 'product' });
+  
   return inventory;
 };

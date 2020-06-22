@@ -20,6 +20,8 @@ module.exports = function setupCustomerModel(config) {
       allowNull: false
     }
   });
+  
   customer.belongsTo(sequelize.models.person, { as: 'person' });
+  
   return customer;
 };

@@ -3,34 +3,34 @@
 const Sequelize = require('sequelize');
 const setupDatabase = require('./database');
 
-module.exports = function setupOrderDetailModel(config) {
+module.exports = function setupEventEquipmentModel(config) {
   const sequelize = setupDatabase(config);
 
-  const orderDetail = sequelize.define('orderDetail', {
+  const eventEquipment = sequelize.define('eventEquipment', {
     quantity: {
         type: Sequelize.INTEGER,
         allowNull: false
     },
-    orderId: {
+    eventId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'orders',
+          model: 'events',
           key: 'id'
         }
     },
-    productId: {
+    equipmentId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'products',
+          model: 'equipments',
           key: 'id'
         }
     }
   });
   
-  orderDetail.belongsTo(sequelize.models.order, { as: 'order' });
-  orderDetail.belongsTo(sequelize.models.product, { as: 'product' });
+  eventEquipment.belongsTo(sequelize.models.event, { as: 'event' });
+  eventEquipment.belongsTo(sequelize.models.equipment, { as: 'equipment' });
   
-  return orderDetail;
+  return eventEquipment;
 };

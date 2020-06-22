@@ -23,6 +23,8 @@ module.exports = function setupProductModel(config) {
       }
     }
   });
+
   product.belongsTo(sequelize.models.category, { as: 'category' });
+
   return product;
 };
