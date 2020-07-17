@@ -209,36 +209,27 @@ module.exports = function setupPersonService(personModel) {
   }
 
   async function create(person) {
-    // Validate fields
     const errors = [];
     await validatePersonCreate(person, errors);
-    // If errors were found, return 400
     if (errors.length > 0) {
       return baseService.getServiceResponse(400, 'Error', errors.join('\n'));
     }
-    // Else, create the person
     let createdPerson = await personModel.create(person);
-    // Then obtain their complete data (including associations)
     createdPerson = await personModel.findOne({
       include: { all: true },
       where: { id: createdPerson.id }
     });
-    // And return 200
     return baseService.getServiceResponse(200, 'Success', getSimplePersonModel(createdPerson));
   }
 
   async function findById(id) {
-    // Find person
     const person = await personModel.findOne({
       include: { all: true },
       where: { id }
     });
-    // If a person was found, return 200
     if (person) {
       return baseService.getServiceResponse(200, 'Success', getSimplePersonModel(person));
-    }
-    // Else, return 404
-    else {
+    } else {
       return baseService.getServiceResponse(404, 'Not found', {});
     }
   }

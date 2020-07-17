@@ -23,7 +23,12 @@ async function setup() {
   const db = await dbInstance(true).catch(handleFatalError);
   await seeders.seedCategories(db.categoryModel);
   await seeders.seedDocumentTypes(db.documentTypeModel);
+  
+  await seeders.seedOrderStates(db.orderStateModel);
+  await seeders.seedOrderTypes(db.orderTypeModel);
+
   await seeders.seedPeople(db.personModel);
+  
   await seeders.seedPermissions(db.permissionModel);
   await seeders.seedRoles(db.roleModel);
   await seeders.seedRolePermissions(db.rolePermissionModel);

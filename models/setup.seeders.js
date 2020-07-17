@@ -20,6 +20,24 @@ function getDocumentTypes() {
   ]
 }
 
+function getOrderStates() {
+  return [
+    constants.CONFIRMED_ORDER_STATE,
+    constants.CANCELLED_ORDER_STATE,
+    constants.SHIPPED_ORDER_STATE,
+    constants.EN_ROUTE_ORDER_STATE,
+    constants.ARRIVED_ORDER_STATE,
+    constants.COMPLETED_ORDER_STATE
+  ]
+}
+
+function getOrderTypes() {
+  return [
+    constants.CASH_ORDER_TYPE,
+    constants.CONSIGNMENT_ORDER_TYPE
+  ]
+}
+
 function getPermissions() {
   return [
     constants.ORDERS_PERMISSION,
@@ -44,6 +62,14 @@ async function seedCategories(model) {
 
 async function seedDocumentTypes(model) {
   await model.bulkCreate(getDocumentTypes());
+}
+
+async function seedOrderStates(model) {
+  await model.bulkCreate(getOrderStates());
+}
+
+async function seedOrderTypes(model) {
+  await model.bulkCreate(getOrderTypes());
 }
 
 async function seedPeople(model) {
@@ -125,6 +151,8 @@ async function seedUserRoles(model) {
 module.exports = {
   seedCategories,
   seedDocumentTypes,
+  seedOrderStates,
+  seedOrderTypes,
   seedPeople,
   seedPermissions,
   seedRoles,

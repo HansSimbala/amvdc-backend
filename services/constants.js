@@ -13,14 +13,24 @@ module.exports = {
   ORDERS_PERMISSION: { id: 1, name: 'Pedidos', slug: 'orders', description: 'Lista de pedidos a entregar.' },
   CASH_SALE_PERMISSION: { id: 2, name: 'Venta al contado', slug: 'cash', description: 'Venta al contado.' },
   CONSIGNMENT_SALE_PERMISSION: { id: 3, name: 'Venta a consignación', slug: 'consignment', description: 'Venta sobre consignación.' },
-  CREDIT_SALE_PERMISSION: { id: 4, name: 'Venta al credito', slug: 'credit', description: 'Venta al credito.' },
+  CREDIT_SALE_PERMISSION: { id: 4, name: 'Venta al credito', slug: 'credit', description: 'Venta al crédito.' },
   // Role
-  ADMINISTRATE_ROLE: { id: 1, name: 'Aministrar', slug: 'administrate', description: 'Administración del sistema.' },
+  ADMINISTRATE_ROLE: { id: 1, name: 'Administrar', slug: 'administrate', description: 'Administración del sistema.' },
   COLLECT_ROLE: { id: 2, name: 'Cobrar', slug: 'collect', description: 'Cobro de pedidos.' },
   DISTRIBUTE_ROLE: { id: 3, name: 'Distribuir', slug: 'distribute', description: 'Distribución de pedidos.' },
   // Status
   ACTIVE_STATUS: { id: 1, name: 'Active' },
   INACTIVE_STATUS: { id: 0, name: 'Inactive' },
+  // ORDER STATES
+  CONFIRMED_ORDER_STATE: { id: 1, name: 'Confirmada', description: 'Orden confirmada.' },
+  CANCELLED_ORDER_STATE: { id: 2, name: 'Cancelada', description: 'Orden cancelada.' },
+  SHIPPED_ORDER_STATE: { id: 3, name: 'Preparada', description: 'Orden preparada para su envío.' },
+  EN_ROUTE_ORDER_STATE: { id: 4, name: 'En ruta', description: 'Orden en ruta.' },
+  ARRIVED_ORDER_STATE: { id: 5, name: 'Arribada', description: 'Orden arribada al destino.' },
+  COMPLETED_ORDER_STATE: { id: 6, name: 'Completada', description: 'Orden completada' },
+  // ORDER TYPE
+  CASH_ORDER_TYPE: { id: 1, name: 'Pedido al contado', description: 'Pedido al contado.' },
+  CONSIGNMENT_ORDER_TYPE: { id: 2, name: 'Pedido por consignación', description: 'Pedido por consignación.' },
   // User
   ADMIN_USER: { id: 1, username: 'admin', email: 'admin@amvdc.com', password: 'admin' },
   DELIVERY_USER: { id: 2, username: 'delivery', email: 'delivery@amvdc.com', password: 'delivery' },

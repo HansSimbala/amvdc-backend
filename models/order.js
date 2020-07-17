@@ -11,10 +11,6 @@ module.exports = function setupOrderModel(config) {
       type: Sequelize.DATEONLY,
       allowNull: true
     },
-    status: {
-      type: Sequelize.BOOLEAN,
-      allowNull: false
-    },
     customerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
