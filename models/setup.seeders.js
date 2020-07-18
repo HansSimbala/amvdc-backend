@@ -20,6 +20,12 @@ function getDocumentTypes() {
   ]
 }
 
+function getLocations() {
+  return [
+    constants.PREMISES_LOCATION
+  ]
+}
+
 function getOrderStates() {
   return [
     constants.CONFIRMED_ORDER_STATE,
@@ -62,6 +68,10 @@ async function seedCategories(model) {
 
 async function seedDocumentTypes(model) {
   await model.bulkCreate(getDocumentTypes());
+}
+
+async function seedLocations(model) {
+  await model.bulkCreate(getLocations());
 }
 
 async function seedOrderStates(model) {
@@ -151,6 +161,7 @@ async function seedUserRoles(model) {
 module.exports = {
   seedCategories,
   seedDocumentTypes,
+  seedLocations,
   seedOrderStates,
   seedOrderTypes,
   seedPeople,

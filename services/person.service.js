@@ -65,7 +65,6 @@ module.exports = function setupPersonService(personModel) {
   }
   //#endregion
 
-  //#region Validators
   function validateBirthdate(birthdate, errors) {
     if (!birthdate) {
       errors.push('The birthdate field is required');
@@ -126,13 +125,11 @@ module.exports = function setupPersonService(personModel) {
     }
   }
   async function validatePersonCreate(person, errors) {
-    // Validate if document exists
     const documentExists = await personModel.findOne({ where: { document: person.document } });
     if (documentExists) {
       errors.push('Document field must be unique');
       return;
     }
-    // Validate the rest of the fields
     validateBirthdate(person.birthdate, errors);
     validateDocument(person.documentTypeId, person.document, errors);
     validateGender(person.gender, errors);
@@ -141,12 +138,10 @@ module.exports = function setupPersonService(personModel) {
   }
 
   async function validatePersonModify(id, person, errors) {
-    // Validate if document exists
     const documentExists = await personModel.findOne({ where: { document: person.document } });
     if (documentExists && documentExists.id !== id) {
       errors.push('Document field must be unique');
     }
-    // Validate the rest of the fields
     if (person.birthdate) {
       validateBirthdate(person.birthdate, errors);
     }
@@ -160,14 +155,11 @@ module.exports = function setupPersonService(personModel) {
       validateName(person.name, errors);
     }
   }
-  //#endregion
 
   async function doList(requestQuery) {
-    // Get the query
     let qOrderBy = getOrderField(requestQuery.orderBy);
     let qOrderType = getOrderType(requestQuery.orderType);
     let qQueryWhereClause = getQueryWhereClause(requestQuery.query.split(' '));
-    // Execute the query
     const people = await personModel.findAll({
       include: { all: true },
       limit: requestQuery.limit,
@@ -180,31 +172,24 @@ module.exports = function setupPersonService(personModel) {
         ]
       }
     });
-    // Return the data
     return baseService.getServiceResponse(200, 'Success', people.map(p => getSimplePersonModel(p)));
   }
 
   async function modify(id, person) {
-    // If person doesn't exist, return 404
     const personExists = await personModel.findOne({ where: { id } });
     if (!personExists) {
       return baseService.getServiceResponse(404, 'Not found', {});
     }
-    // Else, validate fields
     const errors = [];
     await validatePersonModify(id, person, errors);
-    // If errors were found, return 400
     if (errors.length > 0) {
       return baseService.getServiceResponse(400, 'Error', errors.join('\n'));
     }
-    // Else, create the person
     let modifiedPerson = await personModel.update(person, { where: { id } });
-    // Then obtain their complete data (including associations)
     modifiedPerson = await personModel.findOne({
       include: { all: true },
       where: { id }
     });
-    // And return 200
     return baseService.getServiceResponse(200, 'Success', getSimplePersonModel(modifiedPerson));
   }
 

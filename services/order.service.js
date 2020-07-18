@@ -20,30 +20,58 @@ module.exports = function setupOrderService(dependencies) {
     return baseService.getServiceResponse(200, 'Success', {});
   }
 
-  async function doList() {
+  async function doList(requestQuery) {
     try {
-      const orders = await orderModel.findAll();
-      console.log("HHR"+ JSON.stringify(await getOrderModel(orders[1])));
-      return baseService.getServiceResponse(200, "Success", await Promise.all(orders.map(o => getOrderModel(o))));
+      let orderStateId = requestQuery.orderStateId;
+      let latitude = requestQuery.latitude;
+      let longitude = requestQuery.longitude;
+      // TODO orderByLatAndLong 
+      const orders = await orderModel.findAll({
+        where: { orderStateId }
+      });
+      return baseService.getServiceResponse(200, "Success", await Promise.all(orders.map(o => getSimpleOrderModel(o))));
     } catch (err) {
       console.log('Error: ', err);
       return baseService.getServiceResponse(500, err, {});
     }
   }
 
-  async function getOrderModel(order) {
+  async function findById(id) {
+    const order = await orderModel.findByPk(id);
+    if (order) {
+      return baseService.getServiceResponse(200, 'Success', await getOrderModel(order));
+    } else {
+      return baseService.getServiceResponse(404, 'Not found', {});
+    }    
+  }
+
+  async function getSimpleOrderModel(order) {
     const customer = await customerService.findById(order.customerId);
     const location = await locationService.findById(order.locationId);
-    //const fullName = customer.name + ' ' + customer.lastName;
+    const fullName = customer.name + ' ' + customer.lastName;
     return {
+      id: order.id,
       shippingDate: order.shippingDate,
-      customer: customer.personId,
-      address: location.address
+      customer: fullName,
+      address: location.address,
+      reference: location.reference,
+      latitude: location.latitude,
+      longitude: location.longitude
+    };
+  }
+
+  async function getOrderModel(order) {
+    const orderModel = await getSimpleOrderModel(order);
+    const orderDetail = await orderDetailService.findByOrderId(order.id);
+    return {
+      ...orderModel,
+      orderDetail
     };
   }
 
   return {
     create,
-    doList
+    doList,
+    findById
   };
 }

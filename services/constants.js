@@ -9,6 +9,8 @@ module.exports = {
   DNI_DOCUMENT_TYPE: { id: 1, name: 'DNI' },
   FOREIGN_CARD_DOCUMENT_TYPE: { id: 3, name: 'Foreign card' },
   PASSPORT_DOCUMENT_TYPE: { id: 2, name: 'Passport' },
+  // Location
+  PREMISES_LOCATION: { id: 1, address: 'Av. Jose Carlos Mariategui 2235', reference: 'Polideportivo Jorge Chávez', latitude: -12.143454, longitude: -76.949687},
   // Permission
   ORDERS_PERMISSION: { id: 1, name: 'Pedidos', slug: 'orders', description: 'Lista de pedidos a entregar.' },
   CASH_SALE_PERMISSION: { id: 2, name: 'Venta al contado', slug: 'cash', description: 'Venta al contado.' },

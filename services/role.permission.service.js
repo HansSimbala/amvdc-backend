@@ -18,8 +18,6 @@ module.exports = function setupRolePermissionService(models) {
   }
 
   async function getPermissionsByRole(roleId) {
-    const permissionName = await getPermissionName(1);
-    console.log("Nombre Permiso: "+ JSON.stringify(permissionName));
     const rolePermissions = await rolePermissionModel.findAll({
         attributes: ['permissionId'],
         where: {

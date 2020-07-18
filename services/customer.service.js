@@ -2,7 +2,7 @@
 
 const setupBaseService = require('./base.service');
 
-module.exports = function setupCustomerService(customerModel, personService) {
+module.exports = function setupCustomerService(customerModel, personModel) {
   let baseService = new setupBaseService();
 
   async function create(customer) {
@@ -11,7 +11,14 @@ module.exports = function setupCustomerService(customerModel, personService) {
   }
 
   async function findById(id) {
-    return await customerModel.findByPk(id);
+    const customer = await customerModel.findByPk(id);
+    const person = await personModel.findByPk(customer.id);
+    return {
+      id: customer.id,
+      name: person.name,
+      lastName: person.lastName,
+      birthdate: person.birthdate
+    };
   }
 
   return {

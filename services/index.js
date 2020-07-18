@@ -25,7 +25,7 @@ module.exports = async function () {
   const authenticationService = setupAuthenticationService({ userModel: dbInstance.userModel, userRoleService, rolePermissionService });
   const contributedService = setupContributedService({ personService, personModel: dbInstance.personModel, userModel: dbInstance.userModel });
 
-  const customerService = setupCustomerService(dbInstance.customerModel, personService);
+  const customerService = setupCustomerService(dbInstance.customerModel, dbInstance.personModel);
   const locationService = setupLocationService(dbInstance.locationModel);
   const productService = setupProductService(dbInstance.productModel);
   const orderDetailService = setupOrderDetailService(dbInstance.orderDetailModel, productService);

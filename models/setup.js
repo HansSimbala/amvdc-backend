@@ -24,6 +24,7 @@ async function setup() {
   await seeders.seedCategories(db.categoryModel);
   await seeders.seedDocumentTypes(db.documentTypeModel);
   
+  await seeders.seedLocations(db.locationModel);
   await seeders.seedOrderStates(db.orderStateModel);
   await seeders.seedOrderTypes(db.orderTypeModel);
 
