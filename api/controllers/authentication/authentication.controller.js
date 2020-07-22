@@ -21,9 +21,12 @@ const login = async (request, response) => {
     const authenticationService = await serviceContainer('authentication');
 
     let loginData = await authenticationService.login(authenticationData);
-
     responseCode = loginData.responseCode;
-    responseData = baseController.getSuccessResponse(loginData.data, loginData.message);
+    if(loginData.responseCode == 200) {
+      responseData = baseController.getSuccessResponse(loginData.data, loginData.message);
+    } else {
+      responseData = baseController.getErrorResponse(loginData.message);
+    }
   } catch (err) {
     console.error('Error logging in the application: ', err);
     responseCode = 500;

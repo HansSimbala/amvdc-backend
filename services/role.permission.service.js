@@ -6,16 +6,6 @@ module.exports = function setupRolePermissionService(models) {
   let baseService = new setupBaseService();
 
   const rolePermissionModel = models.rolePermissionModel;
-  const roleModel = models.roleModel;
-  const permissionModel = models.permissionModel;
-
-  async function getPermissionName(permissionId) {
-    const permissionName = await permissionModel.findOne({
-      attributes: ['name', 'slug'],
-      where: { id: permissionId } 
-    });
-    return permissionName;
-  }
 
   async function getPermissionsByRole(roleId) {
     const rolePermissions = await rolePermissionModel.findAll({
