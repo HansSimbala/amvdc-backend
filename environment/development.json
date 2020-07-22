@@ -2,6 +2,6 @@
     "dialect": "postgres",
     "database": "amvdc_db",
     "username": "postgres",
-    "password": "minombre1",
+    "password": "",
     "host": "127.0.0.1"
 }

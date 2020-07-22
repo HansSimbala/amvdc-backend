@@ -1,0 +1,9 @@
+{
+    "dialect": "postgres",
+    "database": "amvdc_db",
+    "username": "postgres",
+    "password": "Dbx3LnUnDpQej81poLRk",
+    "host": "amvdc-db.ccgtjq0zhsf5.us-east-2.rds.amazonaws.com",
+    "port": "5432",
+    "operatorsAliases": false
+}

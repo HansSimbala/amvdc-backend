@@ -24,7 +24,7 @@ const setupOrderDetailModel = require('./orderDetail');
 
 module.exports = async function (setup = false) {
 
-  const config = require('./../environment/development.json');
+  const config = require('./../environment/production.json');
   const dbInstance = setupDatabase(config);
 
   const categoryModel = setupCategoryModel(config);
