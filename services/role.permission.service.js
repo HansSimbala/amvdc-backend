@@ -1,33 +1,36 @@
 'use strict';
 
-const setupBaseService = require('./base.service');
+const permission = require("../models/permission");
+const p = require("proxyquire");
 
-module.exports = function setupRolePermissionService(models) {
-  let baseService = new setupBaseService();
+module.exports = function setupRolePermissionService(dependencies) {
 
-  const rolePermissionModel = models.rolePermissionModel;
+  const rolePermissionModel = dependencies.rolePermissionModel;
+  const permissionService = dependencies.permissionService;
 
-  async function getPermissionsByRole(roleId) {
-    const rolePermissions = await rolePermissionModel.findAll({
-        attributes: ['permissionId'],
-        where: {
-          roleId
-        }
-    });
-    console.log(JSON.stringify(rolePermissions));    
-    return rolePermissions;
+  async function getPermissionsByRoles(roles) {
+    return await Promise.all(roles.map(r => getPermissionsRoleModel(r)));
   }
 
-  async function getPermissionsByRoles(userRoles) {
-    const permissionByRole = [];
-    for (let index = 0; index < userRoles.length; index++) {
-      let userRole = JSON.parse(JSON.stringify(userRoles[index]));
-      let permissions = await getPermissionsByRole(userRole.roleId);
-      userRole = {...userRole, permissions};
-      permissionByRole.push(userRole);
-    }
-    console.log(JSON.stringify(permissionByRole));
-    return permissionByRole;
+  async function getPermissionsByRoleId(roleId) {
+    const permissions = await rolePermissionModel.findAll({ where: { roleId } });
+    return await Promise.all(permissions.map(p => permissionService.findById(p.permissionId)));
+  }
+
+  function getPermissionsModel(permissions) {
+    const permissionsList = [];
+    permissions.map(p => permissionsList.push(p.name));
+    return permissionsList;
+  }
+
+  async function getPermissionsRoleModel(role) {
+    const permissions = await getPermissionsByRoleId(role.id);
+    const permissionsModel = getPermissionsModel(permissions);
+    return {
+      id: role.id,
+      name: role.name,
+      permissions: permissionsModel
+    };
   }
 
   return {

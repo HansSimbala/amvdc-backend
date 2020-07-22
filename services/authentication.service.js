@@ -14,18 +14,16 @@ module.exports = function setupAuthenticationService(dependencies) {
     const user = await userModel.findOne({ where: { email: data.email } });
     const passwordMatch = !user ? false : await bcrypt.compare(data.password, user.password);
 
-    if(!passwordMatch) {
-        return baseService.getServiceResponse(404, 'Not found', {});
+    if (!passwordMatch) {
+      return baseService.getServiceResponse(404, 'Not found', {});
     }
-    const userData = await getUserData(user);
-    
-    return baseService.getServiceResponse(200, 'Success', userData);
+
+    return baseService.getServiceResponse(200, 'Success', await getUserData(user));
   }
 
   async function getUserData(user) {
-    const userRoles = await userRoleService.getRolesByUser(user.id);
+    const userRoles = await userRoleService.getRolesByUserId(user.id);
     const rolesPermissions = await rolePermissionService.getPermissionsByRoles(userRoles);
-
     return getSimpleUserDataModel(user, rolesPermissions);
   }
 

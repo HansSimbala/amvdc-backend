@@ -10,6 +10,11 @@ module.exports = function setupRoleService(roleModel) {
     return baseService.getServiceResponse(200, 'Success', {});
   }
 
+  async function findAll() {
+    const roles = await roleModel.findAll();
+    return roles;
+  }
+
   async function findById(id) {
     const role = await roleModel.findByPk(id);
     return role;
@@ -17,6 +22,7 @@ module.exports = function setupRoleService(roleModel) {
 
   return {
     create,
+    findAll,
     findById
   };
 }
