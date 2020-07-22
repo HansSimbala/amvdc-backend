@@ -1,8 +1,5 @@
 'use strict';
 
-const permission = require("../models/permission");
-const p = require("proxyquire");
-
 module.exports = function setupRolePermissionService(dependencies) {
 
   const rolePermissionModel = dependencies.rolePermissionModel;
@@ -14,12 +11,12 @@ module.exports = function setupRolePermissionService(dependencies) {
 
   async function getPermissionsByRoleId(roleId) {
     const permissions = await rolePermissionModel.findAll({ where: { roleId } });
-    return await Promise.all(permissions.map(p => permissionService.findById(p.permissionId)));
+    return await Promise.all(permissions.map(pe => permissionService.findById(pe.permissionId)));
   }
 
   function getPermissionsModel(permissions) {
     const permissionsList = [];
-    permissions.map(p => permissionsList.push(p.name));
+    permissions.map(pe => permissionsList.push(pe.name));
     return permissionsList;
   }
 
