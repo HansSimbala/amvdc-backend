@@ -22,6 +22,7 @@ module.exports = function setupOrderService(dependencies) {
 
   async function doList(requestQuery) {
     try {
+      let ordersList = [];
       let orderStateId = requestQuery.orderStateId;
       let latitude = requestQuery.latitude;
       let longitude = requestQuery.longitude;
@@ -29,7 +30,10 @@ module.exports = function setupOrderService(dependencies) {
       const orders = await orderModel.findAll({
         where: { orderStateId }
       });
-      return baseService.getServiceResponse(200, "Success", await Promise.all(orders.map(o => getSimpleOrderModel(o))));
+      if (orders) {
+        ordersList = await Promise.all(orders.map(o => getSimpleOrderModel(o)));
+      }
+      return baseService.getServiceResponse(200, "Success", ordersList);
     } catch (err) {
       console.log('Error: ', err);
       return baseService.getServiceResponse(500, err, {});
@@ -51,8 +55,11 @@ module.exports = function setupOrderService(dependencies) {
     const fullName = customer.name + ' ' + customer.lastName;
     return {
       id: order.id,
+      orderStateId: order.orderStateId,
+      orderTypeId: order.orderTypeId,
       shippingDate: order.shippingDate,
       customer: fullName,
+      contactNumber: customer.contactNumber,
       address: location.address,
       reference: location.reference,
       latitude: location.latitude,

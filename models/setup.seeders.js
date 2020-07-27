@@ -53,6 +53,14 @@ function getPermissions() {
   ]
 }
 
+function getProducts() {
+  return [
+    { id: 1, name: 'Cristal', price: 50, description: 'Cerveza Cristal.', categoryId: constants.BEER_CATEGORY.id },
+    { id: 2, name: 'Pilsen Callao', price: 49, description: 'Cerveza Pilsen Callao.', categoryId: constants.BEER_CATEGORY.id },
+    { id: 3, name: 'Cusqueña', price: 60, description: 'Cerveza Cusqueña.', categoryId: constants.BEER_CATEGORY.id }
+  ]
+}
+
 function getRoles() {
   return [
     constants.ADMINISTRATE_ROLE,
@@ -104,6 +112,7 @@ async function seedPeople(model) {
       birthdate: faker.date.past(),
       document,
       documentTypeId,
+      contactNumber: faker.random.number({ min: 100000, max: 999999999 }),
       createdAt: faker.date.past(),
       updatedAt: new Date()
     });
@@ -113,6 +122,10 @@ async function seedPeople(model) {
 
 async function seedPermissions(model) {
   await model.bulkCreate(getPermissions());
+}
+
+async function seedProducts(model) {
+  await model.bulkCreate(getProducts());
 }
 
 async function seedRoles(model) {
@@ -166,6 +179,7 @@ module.exports = {
   seedOrderTypes,
   seedPeople,
   seedPermissions,
+  seedProducts,
   seedRoles,
   seedRolePermissions,
   seedUsers,

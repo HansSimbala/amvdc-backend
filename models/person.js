@@ -30,6 +30,10 @@ module.exports = function setupPersonModel(config) {
       type: Sequelize.STRING(25),
       allowNull: true,
       unique: true
+    },
+    contactNumber: {
+      type: Sequelize.STRING(25),
+      allowNull: true
     }
   });
   person.belongsTo(sequelize.models.documentType, { as: 'documentType' });

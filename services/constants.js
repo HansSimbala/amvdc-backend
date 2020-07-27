@@ -15,7 +15,7 @@ module.exports = {
   ORDERS_PERMISSION: { id: 1, name: 'Pedidos', slug: 'orders', description: 'Lista de pedidos a entregar.' },
   CASH_SALE_PERMISSION: { id: 2, name: 'Venta al contado', slug: 'cash', description: 'Venta al contado.' },
   CONSIGNMENT_SALE_PERMISSION: { id: 3, name: 'Venta a consignación', slug: 'consignment', description: 'Venta sobre consignación.' },
-  CREDIT_SALE_PERMISSION: { id: 4, name: 'Venta al credito', slug: 'credit', description: 'Venta al crédito.' },
+  CREDIT_SALE_PERMISSION: { id: 4, name: 'Venta al crédito', slug: 'credit', description: 'Venta al crédito.' },
   // Role
   ADMINISTRATE_ROLE: { id: 1, name: 'Administrar', slug: 'administrate', description: 'Administración del sistema.' },
   COLLECT_ROLE: { id: 2, name: 'Cobrar', slug: 'collect', description: 'Cobro de pedidos.' },
@@ -37,8 +37,8 @@ module.exports = {
   ADMIN_USER: { id: 1, username: 'admin', email: 'admin@amvdc.com', password: 'admin' },
   DELIVERY_USER: { id: 2, username: 'delivery', email: 'delivery@amvdc.com', password: 'delivery' },
   // Person
-  ADMIN_PERSON: { id: 1, name: 'Hans', lastName: 'Simbala', birthdate: '1998-03-31', document: '72721607', createdAt: new Date(), updatedAt: new Date() },
-  DELIVERY_PERSON: { id: 2, name: 'Juan', lastName: 'Perez', birthdate: '1985-07-25', document: '78791907', createdAt: new Date(), updatedAt: new Date() },
+  ADMIN_PERSON: { id: 1, name: 'Hans', lastName: 'Simbala', birthdate: '1998-03-31', document: '72721607', contactNumber: '941216744' },
+  DELIVERY_PERSON: { id: 2, name: 'Juan', lastName: 'Perez', birthdate: '1985-07-25', document: '78791907', contactNumber: '989257585' },
   // BCRYPT
   BCRYPT_WORK_FACTOR: 12
 }

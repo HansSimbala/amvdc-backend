@@ -2,6 +2,7 @@
 
 const setupDatabase = require('./database');
 
+const setupAdditionalCharge = require('./additionalCharge');
 const setupCategoryModel = require('./category');
 const setupProductModel = require('./product');
 const setupInventoryModel = require('./inventory');
@@ -27,6 +28,7 @@ module.exports = async function (setup = false) {
   const config = require('./../environment/production.json');
   const dbInstance = setupDatabase(config);
 
+  const additionalChargeModel = setupAdditionalCharge(config);
   const categoryModel = setupCategoryModel(config);
   const productModel = setupProductModel(config);
   const inventoryModel = setupInventoryModel(config);
@@ -54,6 +56,7 @@ module.exports = async function (setup = false) {
   }
 
   return {
+    additionalChargeModel,
     categoryModel,
     productModel,
     inventoryModel,

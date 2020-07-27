@@ -2,6 +2,7 @@
 
 const setupDatabase = require('./../models');
 const setupAuthenticationService = require('./authentication.service');
+const setupAdditionalChargeService = require('./additional.charge.service');
 const setupContributedService = require('./contributed.service');
 const setupCustomerService = require('./customer.service');
 const setupDocumentTypeService = require('./document.type.service');
@@ -29,6 +30,7 @@ module.exports = async function () {
   const authenticationService = setupAuthenticationService({ userModel: dbInstance.userModel, userRoleService, rolePermissionService });
   const contributedService = setupContributedService({ personService, personModel: dbInstance.personModel, userModel: dbInstance.userModel });
 
+  const additionalChargeService = setupAdditionalChargeService(dbInstance.additionalChargeModel);
   const customerService = setupCustomerService(dbInstance.customerModel, dbInstance.personModel);
   const locationService = setupLocationService(dbInstance.locationModel);
   const productService = setupProductService(dbInstance.productModel);
@@ -36,11 +38,13 @@ module.exports = async function () {
   const orderService = setupOrderService({ customerService, locationService, orderDetailService, orderModel: dbInstance.orderModel });
 
   return {
+    additionalChargeService,
     authenticationService,
     contributedService,
     documentTypeService,
     personService,
     userService,
+    additionalChargeService,
     customerService,
     locationService,
     productService,

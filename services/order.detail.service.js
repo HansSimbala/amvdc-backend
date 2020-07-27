@@ -19,6 +19,7 @@ module.exports = function setupOrderDetailService(orderDetailModel, productServi
     const product = await productService.findById(orderDetail.productId);
     return {
       product: product.name,
+      unitPrice: product.price,
       quantity: orderDetail.quantity
     };
   }

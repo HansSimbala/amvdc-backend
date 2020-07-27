@@ -17,6 +17,7 @@ module.exports = function setupCustomerService(customerModel, personModel) {
       id: customer.id,
       name: person.name,
       lastName: person.lastName,
+      contactNumber: person.contactNumber,
       birthdate: person.birthdate
     };
   }

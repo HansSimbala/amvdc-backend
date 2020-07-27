@@ -43,6 +43,14 @@ module.exports = function setupOrderModel(config) {
         key: 'id'
       }
     },
+    additionalChargeId: {
+      type: Sequelize.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'additionalCharges',
+        key: 'id'
+      }
+    },
     eventId: {
       type: Sequelize.INTEGER,
       allowNull: true,
@@ -57,6 +65,7 @@ module.exports = function setupOrderModel(config) {
   order.belongsTo(sequelize.models.location, { as: 'location' });
   order.belongsTo(sequelize.models.orderState, { as: 'orderState' });
   order.belongsTo(sequelize.models.orderType, { as: 'orderType' });
+  order.belongsTo(sequelize.models.additionalCharge, { as: 'additionalCharge' });
   order.belongsTo(sequelize.models.event, { as: 'event' });
   
   return order;

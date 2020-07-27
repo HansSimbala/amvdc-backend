@@ -10,6 +10,10 @@ module.exports = function setupProductModel(config) {
       type: Sequelize.STRING(25),
       allowNull: true
     },
+    price: {
+      type: Sequelize.DECIMAL(10, 2),
+      allowNull: true
+    },
     description: {
       type: Sequelize.STRING(50),
       allowNull: true

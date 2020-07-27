@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 
+router.use('/additionalCharges', require('./additional.charges'));
 router.use('/authenticate', require('./authentication'));
 router.use('/locations', require('./locations'));
 router.use('/orders', require('./orders'));

@@ -10,6 +10,8 @@ module.exports = async function serviceContainer(serviceName) {
   }
   // Return requested service
   switch (serviceName) {
+    case 'additionalCharge':
+      return services.additionalChargeService;
     case 'authentication':
       return services.authenticationService;
     case 'contributed':
