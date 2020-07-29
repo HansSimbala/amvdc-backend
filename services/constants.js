@@ -15,7 +15,7 @@ module.exports = {
   ORDERS_PERMISSION: { id: 1, name: 'Pedidos', slug: 'orders', description: 'Lista de pedidos a entregar.' },
   CASH_SALE_PERMISSION: { id: 2, name: 'Venta al contado', slug: 'cash', description: 'Venta al contado.' },
   CONSIGNMENT_SALE_PERMISSION: { id: 3, name: 'Venta a consignación', slug: 'consignment', description: 'Venta sobre consignación.' },
-  CREDIT_SALE_PERMISSION: { id: 4, name: 'Venta al crédito', slug: 'credit', description: 'Venta al crédito.' },
+  CREATE_ORDER_PERMISSION: { id: 4, name: 'Crear pedido', slug: 'create_order', description: 'Crear pedido.' },
   // Role
   ADMINISTRATE_ROLE: { id: 1, name: 'Administrar', slug: 'administrate', description: 'Administración del sistema.' },
   COLLECT_ROLE: { id: 2, name: 'Cobrar', slug: 'collect', description: 'Cobro de pedidos.' },

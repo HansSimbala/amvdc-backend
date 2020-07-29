@@ -37,7 +37,7 @@ const post = async (request, response) => {
       birthdate: request.body.birthdate && request.body.birthdate.trim(),
       documentTypeId: request.body.documentTypeId && parseInt(request.body.documentTypeId),
       document: request.body.document && request.body.document.trim(),
-      gender: request.body.gender && request.body.gender.trim()
+      contactNumber: request.body.contactNumber && request.body.contactNumber.trim()    
     };
     // Create person
     const personData = await personService.create(person);

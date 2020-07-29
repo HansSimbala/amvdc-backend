@@ -3,11 +3,10 @@
 const setupBaseService = require('./base.service');
 
 module.exports = function setupOrderDetailService(orderDetailModel, productService) {
-  let baseService = new setupBaseService();
 
-  async function create(location) {
-    await orderDetailModel.create(location);
-    return baseService.getServiceResponse(200, 'Success', {});
+  async function create(orderDetail) {
+    const getOrderDetail = await orderDetailModel.create(orderDetail);
+    return getOrderDetail;
   }
 
   async function findByOrderId(orderId) {

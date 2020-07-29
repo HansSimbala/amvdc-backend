@@ -12,12 +12,21 @@ module.exports = function setupOrderService(dependencies) {
   const locationService = dependencies.locationService;
 
   async function create(order) {
-    order.orderStateId = constants.CONFIRMED_ORDER_STATE.id;
     if(!order.eventId) {
-      order.eventId = null;
+      console.log("Null event");
     }
-    await orderModel.create(order);
-    return baseService.getServiceResponse(200, 'Success', {});
+    const newOrder = {
+      shippingDate: order.shippingDate,
+      customerId: parseInt(order.customerId),
+      locationId: parseInt(order.locationId),
+      orderStateId: constants.CONFIRMED_ORDER_STATE.id,
+      orderTypeId: parseInt(order.orderTypeId)
+    };
+    const getOrder = await orderModel.create(newOrder);
+    const orderDetails = order.orderDetail;
+    orderDetails.map(o => o.orderId = getOrder.id);
+    await Promise.all(orderDetails.map(oD => orderDetailService.create(oD)));
+    return baseService.getServiceResponse(200, 'Success', getOrder);
   }
 
   async function doList(requestQuery) {

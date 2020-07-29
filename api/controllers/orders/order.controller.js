@@ -31,7 +31,8 @@ const post = async (request, response) => {
       customerId: request.body.customerId && parseInt(request.body.customerId),
       locationId: request.body.locationId && parseInt(request.body.locationId),
       orderTypeId: request.body.orderTypeId && parseInt(request.body.orderTypeId),
-      eventId: request.body.eventId && parseInt(request.body.eventId),
+      orderDetail: request.body.orderDetail,
+      eventId: request.body.eventId && parseInt(request.body.eventId)
     };
     const orderData = await orderService.create(order);
     responseCode = orderData.responseCode;

@@ -16,6 +16,8 @@ module.exports = async function serviceContainer(serviceName) {
       return services.authenticationService;
     case 'contributed':
       return services.contributedService;
+    case 'customer':
+      return services.customerService;
     case 'documentType':
       return services.documentTypeService;
     case 'location':

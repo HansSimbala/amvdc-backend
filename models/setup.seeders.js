@@ -49,7 +49,7 @@ function getPermissions() {
     constants.ORDERS_PERMISSION,
     constants.CASH_SALE_PERMISSION,
     constants.CONSIGNMENT_SALE_PERMISSION,
-    constants.CREDIT_SALE_PERMISSION
+    constants.CREATE_ORDER_PERMISSION
   ]
 }
 
@@ -135,10 +135,9 @@ async function seedRoles(model) {
 async function seedRolePermissions(model) {
   const rolePermissions = [];
 
-  rolePermissions.push({ roleId: constants.ADMINISTRATE_ROLE.id, permissionId: constants.ORDERS_PERMISSION.id, createdAt: faker.date.past(), updatedAt: new Date() });
+  rolePermissions.push({ roleId: constants.ADMINISTRATE_ROLE.id, permissionId: constants.CREATE_ORDER_PERMISSION.id, createdAt: faker.date.past(), updatedAt: new Date() });
   rolePermissions.push({ roleId: constants.DISTRIBUTE_ROLE.id, permissionId: constants.ORDERS_PERMISSION.id, createdAt: faker.date.past(), updatedAt: new Date() });
   rolePermissions.push({ roleId: constants.COLLECT_ROLE.id, permissionId: constants.CASH_SALE_PERMISSION.id, createdAt: faker.date.past(), updatedAt: new Date() });
-  rolePermissions.push({ roleId: constants.COLLECT_ROLE.id, permissionId: constants.CREDIT_SALE_PERMISSION.id, createdAt: faker.date.past(), updatedAt: new Date() });
   rolePermissions.push({ roleId: constants.COLLECT_ROLE.id, permissionId: constants.CONSIGNMENT_SALE_PERMISSION.id, createdAt: faker.date.past(), updatedAt: new Date() });
 
   await model.bulkCreate(rolePermissions);
@@ -165,6 +164,7 @@ async function seedUserRoles(model) {
   // ADMIN
   userRoles.push({ userId: constants.ADMIN_USER.id, roleId: constants.COLLECT_ROLE.id, createdAt: faker.date.past(), updatedAt: new Date() });
   userRoles.push({ userId: constants.ADMIN_USER.id, roleId: constants.DISTRIBUTE_ROLE.id, createdAt: faker.date.past(), updatedAt: new Date() });
+  userRoles.push({ userId: constants.ADMIN_USER.id, roleId: constants.ADMINISTRATE_ROLE.id, createdAt: faker.date.past(), updatedAt: new Date() });
   // DELIVERY
   userRoles.push({ userId: constants.DELIVERY_USER.id, roleId: constants.DISTRIBUTE_ROLE.id, createdAt: faker.date.past(), updatedAt: new Date() });
 
