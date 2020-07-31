@@ -22,7 +22,7 @@ const login = async (request, response) => {
 
     let loginData = await authenticationService.login(authenticationData);
     responseCode = loginData.responseCode;
-    if(loginData.responseCode == 200) {
+    if (loginData.responseCode == 200) {
       responseData = baseController.getSuccessResponse(loginData.data, loginData.message);
     } else {
       responseData = baseController.getErrorResponse(loginData.message);
